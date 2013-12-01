@@ -14,10 +14,11 @@ def get_embed_data(url):
     }
 
     album_param = data['tralbum_param']
-    if album_param['name'] == 'track':
+    track = result['track'] = album_param['name'] == 'track'
+    if track:
         track_data = data['album_embed_data']
         result['album_id'] = track_data['tralbum_param']['value']
-        result['track'] = track_data['t']
+        result['track_num'] = track_data['t']
     else:
         result['album_id'] = album_param['value']
     return result

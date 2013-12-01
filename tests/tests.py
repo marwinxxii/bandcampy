@@ -20,7 +20,8 @@ class BandcampTestCase(unittest.TestCase):
             'artist_id': 1596630884,
             'album_title': 'Lacuna',
             'album_id': 1335340116,
-            'base_url': 'http://bandcamp.com'
+            'base_url': 'http://bandcamp.com',
+            'track': False,
         }
         self.assertEqual(actual, expected)
 
@@ -35,7 +36,8 @@ class BandcampTestCase(unittest.TestCase):
             'album_title': 'Lacuna',
             'album_id': 1335340116,
             'base_url': 'http://bandcamp.com',
-            'track': 6
+            'track': True,
+            'track_num': 6
         }
         self.assertEqual(actual, expected)
 
