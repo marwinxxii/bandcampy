@@ -10,9 +10,10 @@ URL = 'http://topshelfrecords.bandcamp.com/album/lacuna'
 
 class BandcampTestCase(unittest.TestCase):
 
-    @patch('bandcampy.open_stream')
+    @patch('bandcampy.get_page')
     def test_get_album_data(self, open_stream_mock):
-        open_stream_mock.return_value = open(ALBUM_FILE)
+        with open(ALBUM_FILE) as f:
+            open_stream_mock.return_value = f.read()
         actual = bandcampy.get_embed_data(URL)
         expected = {
             'artist': 'Caravels',
@@ -23,9 +24,10 @@ class BandcampTestCase(unittest.TestCase):
         }
         self.assertEqual(actual, expected)
 
-    @patch('bandcampy.open_stream')
+    @patch('bandcampy.get_page')
     def test_get_track_data(self, open_stream_mock):
-        open_stream_mock.return_value = open(TRACK_FILE)
+        with open(TRACK_FILE) as f:
+            open_stream_mock.return_value = f.read()
         actual = bandcampy.get_embed_data(URL)
         expected = {
             'artist': 'Caravels',

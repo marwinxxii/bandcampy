@@ -27,8 +27,7 @@ SEARCH_EXPR = 'var {} ='
 def get_data(url, field):
     '''Read Bandcamp response and fetch data from it.'''
 
-    with open_stream(url) as stream:
-        data = stream.read().decode('utf-8')
+    data = get_page(url)
     search = SEARCH_EXPR.format(field)
     i = data.find(search)
     if i == -1:
@@ -45,5 +44,7 @@ def parse_json(s):
     s = s.replace('" + "', '')
     return rson.loads(s)
 
-def open_stream(url):
-    return urlopen(url)
+def get_page(url):
+    with urlopen(url) as f:
+        data = f.read().decode('utf-8')
+    return data
